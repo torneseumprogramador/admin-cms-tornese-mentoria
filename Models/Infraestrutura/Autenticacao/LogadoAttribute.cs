@@ -8,30 +8,10 @@ namespace admin_cms.Models.Infraestrutura.Autenticacao
 {
   public class LogadoAttribute : ActionFilterAttribute
   {
-    // public override void OnResultExecuting(ResultExecutingContext filterContext)
-    // {
-    //   if( string.IsNullOrEmpty(filterContext.HttpContext.Session.GetString("usuario")) ){
-    //     filterContext.HttpContext.Response.Redirect("/");
-    //     return;
-    //   }
-    //   base.OnResultExecuting(filterContext);
-    // }
-
     public override void OnActionExecuting(ActionExecutingContext filterContext)
     {
-      if( string.IsNullOrEmpty(filterContext.HttpContext.Request.Cookies["alunos"]) ){
-      //if( string.IsNullOrEmpty(filterContext.HttpContext.Session.GetString("alunos")) ){
-        filterContext.HttpContext.Response.Redirect("/");
-
-        // filterContext.Result = new RedirectToRouteResult(
-        //             new RouteValueDictionary(
-        //             new
-        //             {
-        //                 area = "",
-        //                 controller = "Home",
-        //                 action = "Index"
-        //             }));
-                    
+      if( string.IsNullOrEmpty(filterContext.HttpContext.Request.Cookies["adm_cms"]) ){
+        filterContext.HttpContext.Response.Redirect("/login");
         return;
       }
       base.OnActionExecuting(filterContext);

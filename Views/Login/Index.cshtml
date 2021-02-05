@@ -1,0 +1,24 @@
+﻿@{
+    Layout = "_LayoutLogin";
+}
+
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <div class="fadeIn first" style="margin-top: 30px;">
+            <img src="https://www.torneseumprogramador.com.br/imagens/icon.png" style="width: 150px;border-radius: 12px;" id="icon" alt="User Icon">
+        </div>
+
+        <form action="/login/logar" method="post" style="margin-top: 15px;">
+            <input type="email" required="required" id="email" class="fadeIn second" name="email" placeholder="Digite seu e-mail" style="margin-bottom: 10px;" ><br>
+            <input type="password" required="required" id="senha" class="fadeIn third" name="senha" placeholder="Digite sua senha"><br>
+            
+            @if(!string.IsNullOrEmpty(ViewBag.erro)){
+                <div class="alert alert-danger" style="margin: 10px" role="alert">
+                    @ViewBag.erro
+                </div>
+            }
+
+            <input type="submit" class="fadeIn fourth" value="Entrar">
+        </form>
+    </div>
+</div>
