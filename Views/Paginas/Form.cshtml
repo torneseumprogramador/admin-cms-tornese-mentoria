@@ -1,0 +1,36 @@
+@model admin_cms.Models.Domino.Entidades.Pagina
+
+<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+<div class="form-group">
+    <label asp-for="Nome" class="control-label"></label>
+    <input asp-for="Nome" class="form-control" />
+    <span asp-validation-for="Nome" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <label asp-for="Conteudo" class="control-label"></label>
+    <textarea asp-for="Conteudo" class="form-control" style="width: 800px;height: 400px;"></textarea>
+    <span asp-validation-for="Conteudo" class="text-danger"></span>
+</div>
+<div class="form-group form-check">
+    <label class="form-check-label">
+        <input class="form-check-input" asp-for="AreaRestrita" /> @Html.DisplayNameFor(model => model.AreaRestrita)
+    </label>
+</div>
+<div class="form-group form-check">
+    <label class="form-check-label">
+        <input class="form-check-input" asp-for="Login" /> @Html.DisplayNameFor(model => model.Login)
+    </label>
+</div>
+<div class="form-group form-check">
+    <label class="form-check-label">
+        <input class="form-check-input" asp-for="Home" /> @Html.DisplayNameFor(model => model.Home)
+    </label>
+</div>
+<div class="form-group">
+    <label asp-for="Ordem" class="control-label"></label>
+    <input asp-for="Ordem" class="form-control" />
+    <span asp-validation-for="Ordem" class="text-danger"></span>
+</div>
+<div class="form-group">
+    <input type="submit" value="Create" class="btn btn-primary" />
+</div>
