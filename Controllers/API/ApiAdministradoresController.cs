@@ -24,8 +24,16 @@ namespace admin_cms.Controllers.API
         [HttpGet]
         [Route("/api/administradores.json")]
         public async Task<IActionResult> Index()
-        {
-            return StatusCode(200, await _context.Administradores.ToListAsync());
+        {  
+            var adms = from adm in (await _context.Administradores.ToListAsync())
+                select new {
+                    Id = adm.Id,
+                    Nome = adm.Nome,
+                    Telefone = adm.Telefone,
+                    Email = adm.Email
+                };
+
+            return StatusCode(200, adms);
         }
     }
 }
