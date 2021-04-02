@@ -35,5 +35,14 @@ namespace admin_cms.Controllers.API
 
             return StatusCode(200, adms);
         }
+
+        [HttpPost]
+        [Route("/api/administradores.json")]
+        public async Task<IActionResult> Criar([FromBody] Administrador administrador)
+        {  
+            _context.Administradores.Add(administrador);
+            await _context.SaveChangesAsync();
+            return StatusCode(200, administrador);
+        }
     }
 }
