@@ -1,13 +1,11 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using admin_cms.Models.Domino.Entidades;
+using admin_cms.Models.Domino.Services;
 using admin_cms.Models.Infraestrutura.Database;
-using admin_cms.Models.Infraestrutura.Autenticacao;
+using X.PagedList;
 
 namespace admin_cms.Controllers.API
 {
@@ -23,9 +21,9 @@ namespace admin_cms.Controllers.API
         // GET: Administradores
         [HttpGet]
         [Route("/api/administradores.json")]
-        public async Task<IActionResult> Index()
-        {  
-            var adms = from adm in (await _context.Administradores.ToListAsync())
+        public async Task<IActionResult> Index(int page = 1)
+        {
+            var adms = from adm in ( await _context.Administradores.ToPagedListAsync(page, AdministradorService.ITENS_POR_PAGINA))
                 select new {
                     Id = adm.Id,
                     Nome = adm.Nome,
