@@ -42,5 +42,24 @@ namespace admin_cms.Controllers.API
             await _context.SaveChangesAsync();
             return StatusCode(200, administrador);
         }
+
+        [HttpPut]
+        [Route("/api/administradores/{id}.json")]
+        public async Task<IActionResult> Change([FromBody] Administrador administrador)
+        {  
+            _context.Administradores.Update(administrador);
+            await _context.SaveChangesAsync();
+            return StatusCode(200, administrador);
+        }
+
+        [HttpDelete]
+        [Route("/api/administradores/{id}.json")]
+        public async Task<IActionResult> Destroy(int id)
+        {  
+            Administrador adm = await _context.Administradores.FindAsync(id);
+            _context.Administradores.Remove(adm);
+            await _context.SaveChangesAsync();
+            return StatusCode(204);
+        }
     }
 }
