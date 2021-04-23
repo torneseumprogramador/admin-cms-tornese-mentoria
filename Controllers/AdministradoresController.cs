@@ -8,10 +8,12 @@ using Microsoft.EntityFrameworkCore;
 using admin_cms.Models.Domino.Entidades;
 using admin_cms.Models.Infraestrutura.Database;
 using admin_cms.Models.Infraestrutura.Autenticacao;
+using Microsoft.AspNetCore.Authorization;
 
 namespace admin_cms.Controllers
 {
     [Logado]
+    [AllowAnonymous]
     public class AdministradoresController : Controller
     {
         private readonly ContextoCms _context;

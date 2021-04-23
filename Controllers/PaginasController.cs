@@ -8,9 +8,11 @@ using Microsoft.EntityFrameworkCore;
 using admin_cms.Models.Domino.Entidades;
 using admin_cms.Models.Infraestrutura.Database;
 using admin_cms.Models.Infraestrutura.Autenticacao;
+using Microsoft.AspNetCore.Authorization;
 
 namespace admin_cms.Controllers
 {
+    [AllowAnonymous]
     [Logado]
     public class PaginasController : Controller
     {

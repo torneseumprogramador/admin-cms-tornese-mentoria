@@ -10,9 +10,12 @@ using admin_cms.Models.Infraestrutura.Database;
 using admin_cms.Models.Infraestrutura.Autenticacao;
 using X.PagedList;
 using admin_cms.Models.Domino.Services;
+using Microsoft.AspNetCore.Authorization;
 
 namespace admin_cms.Controllers.API
 {
+
+    [ApiController]
     public class ApiPaginasController : ControllerBase
     {
         private readonly ContextoCms _context;
@@ -24,6 +27,7 @@ namespace admin_cms.Controllers.API
 
         [HttpGet]
         [Route("/api/paginas.json")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index(int page = 1)
         {
             return StatusCode(200, await _context.Paginas.ToPagedListAsync(page, PaginaService.ITENS_POR_PAGINA));

@@ -27,5 +27,6 @@ namespace admin_cms.Models.Domino.Entidades
     [Required]
     [MaxLength(150)]
     public string Senha { get; set; }
+    public string Acesso { get{ return "Admin"; }}
   }
 }
