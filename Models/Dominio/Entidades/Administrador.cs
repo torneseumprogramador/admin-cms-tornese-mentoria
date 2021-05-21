@@ -1,5 +1,6 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json.Linq;
@@ -27,6 +28,9 @@ namespace admin_cms.Models.Domino.Entidades
     [Required]
     [MaxLength(150)]
     public string Senha { get; set; }
+
+    [NotMapped]
+    public string Imagem { get; set; }
     public string Acesso { get{ return "Admin"; }}
   }
 }

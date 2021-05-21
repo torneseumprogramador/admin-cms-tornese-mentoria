@@ -6,6 +6,8 @@ using admin_cms.Models.Domino.Entidades;
 using admin_cms.Models.Domino.Services;
 using admin_cms.Models.Infraestrutura.Database;
 using X.PagedList;
+using System.IO;
+using System.Reflection;
 
 namespace admin_cms.Controllers.API
 {
@@ -47,6 +49,11 @@ namespace admin_cms.Controllers.API
         [Route("/api/administradores/{id}.json")]
         public async Task<IActionResult> Change([FromBody] Administrador administrador)
         {  
+            // string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/../../../";
+            string path = $"/Users/danilo/projetos/torne-se/aulas/projeto-cms-comunidade/admin-cms/wwwroot/imgs/img-{administrador.Id}.jpg";
+            System.IO.File.WriteAllBytes(path, Convert.FromBase64String(administrador.Imagem.Replace("data:image/jpeg;base64,", "")));
+
+
             _context.Administradores.Update(administrador);
             await _context.SaveChangesAsync();
             return StatusCode(200, administrador);

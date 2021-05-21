@@ -37,7 +37,7 @@ namespace admin_cms.Controllers.API
                     Token = Token.GerarToken(administrador)
                 });
             }
-            catch{
+            catch(Exception err){
                 return StatusCode(401, new {
                     Mensagem = "Usuário ou senha inválidos"
                 });
