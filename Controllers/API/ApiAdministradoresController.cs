@@ -8,6 +8,10 @@ using admin_cms.Models.Infraestrutura.Database;
 using X.PagedList;
 using System.IO;
 using System.Reflection;
+using Amazon.S3;
+using Amazon.S3.Transfer;
+using Amazon.Runtime;
+using Amazon.S3.Model;
 
 namespace admin_cms.Controllers.API
 {
@@ -49,14 +53,39 @@ namespace admin_cms.Controllers.API
         [Route("/api/administradores/{id}.json")]
         public async Task<IActionResult> Change([FromBody] Administrador administrador)
         {  
-            // string path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "/../../../";
-            string path = $"/Users/danilo/projetos/torne-se/aulas/projeto-cms-comunidade/admin-cms/wwwroot/imgs/img-{administrador.Id}.jpg";
+            var file = $"img-{administrador.Id}.jpg";
+            string path = $"/tmp/{file}";
             System.IO.File.WriteAllBytes(path, Convert.FromBase64String(administrador.Imagem.Replace("data:image/jpeg;base64,", "")));
-
-
+            administrador.Imagem = uploadToS3(path, file);
             _context.Administradores.Update(administrador);
             await _context.SaveChangesAsync();
             return StatusCode(200, administrador);
+        }
+
+        private string uploadToS3(string filePath, string file)
+        {
+            try
+            {
+                IAmazonS3 s3Client = new AmazonS3Client("", "", Amazon.RegionEndpoint.SAEast1);
+                TransferUtility fileTransferUtility = new TransferUtility(s3Client);
+                string bucketName = "aulatornese";
+                fileTransferUtility.Upload(filePath, bucketName);
+
+                GetPreSignedUrlRequest request1 = new GetPreSignedUrlRequest
+                {
+                    BucketName = bucketName,
+                    Key = file,
+                    Expires = DateTime.UtcNow.AddYears(1)
+                };
+               
+                return s3Client.GetPreSignedURL(request1);
+            }
+            catch (AmazonS3Exception s3Exception)
+            {
+                Console.WriteLine(s3Exception.Message,
+                                  s3Exception.InnerException);
+                return "";
+            }
         }
 
         [HttpDelete]

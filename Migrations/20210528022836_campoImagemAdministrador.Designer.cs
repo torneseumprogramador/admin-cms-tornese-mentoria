@@ -2,15 +2,17 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using admin_cms.Models.Infraestrutura.Database;
 
 namespace admin_cms.Migrations
 {
     [DbContext(typeof(ContextoCms))]
-    partial class ContextoCmsModelSnapshot : ModelSnapshot
+    [Migration("20210528022836_campoImagemAdministrador")]
+    partial class campoImagemAdministrador
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
