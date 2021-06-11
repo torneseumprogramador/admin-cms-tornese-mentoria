@@ -92,6 +92,9 @@ namespace admin_cms.Controllers.API
         [Route("/api/administradores/{id}.json")]
         public async Task<IActionResult> Destroy(int id)
         {  
+            //_context.Database.ExecuteSqlCommand("EXEC AddCategory @CategoryName", name);
+            //_context.Database.SqlQuery<Administrador>("exec sp_find_clientes @cliente", id);
+    
             Administrador adm = await _context.Administradores.FindAsync(id);
             _context.Administradores.Remove(adm);
             await _context.SaveChangesAsync();

@@ -26,6 +26,24 @@ namespace admin_cms.Controllers.API
         }
 
         [HttpGet]
+        [Route("/api/paginas/home.json")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Home()
+        {
+            var pagina = await _context.Paginas.Where(p => p.Home).FirstAsync();
+            return StatusCode(200, pagina);
+        }
+
+        [HttpGet]
+        [Route("/api/paginas/{slug}.json")]
+        [AllowAnonymous]
+        public async Task<IActionResult> Slug(string slug)
+        {
+            var pagina = await _context.Paginas.Where(p => p.Nome.ToLower() == slug.ToLower()).FirstAsync();
+            return StatusCode(200, pagina);
+        }
+
+        [HttpGet]
         [Route("/api/paginas.json")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Index(int page = 1)
