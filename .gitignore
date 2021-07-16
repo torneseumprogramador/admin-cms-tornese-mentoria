@@ -34,6 +34,8 @@ obj/
 .AppleDouble
 .LSOverride
 
+appsettings.json
+
 # Icon must end with two \r
 Icon
 
