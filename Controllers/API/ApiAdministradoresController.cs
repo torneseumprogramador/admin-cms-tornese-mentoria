@@ -12,6 +12,7 @@ using Amazon.S3;
 using Amazon.S3.Transfer;
 using Amazon.Runtime;
 using Amazon.S3.Model;
+using Newtonsoft.Json.Linq;
 
 namespace admin_cms.Controllers.API
 {
@@ -66,7 +67,9 @@ namespace admin_cms.Controllers.API
         {
             try
             {
-                IAmazonS3 s3Client = new AmazonS3Client("", "", Amazon.RegionEndpoint.SAEast1);
+                JToken jAppSettings = JToken.Parse(System.IO.File.ReadAllText(Path.Combine(Environment.CurrentDirectory, "appsettings.json")));
+
+                IAmazonS3 s3Client = new AmazonS3Client(jAppSettings["AwsId"].ToString(), jAppSettings["AwsKey"].ToString(), Amazon.RegionEndpoint.SAEast1);
                 TransferUtility fileTransferUtility = new TransferUtility(s3Client);
                 string bucketName = "aulatornese";
                 fileTransferUtility.Upload(filePath, bucketName);

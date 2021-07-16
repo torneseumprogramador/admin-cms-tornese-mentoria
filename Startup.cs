@@ -94,7 +94,7 @@ namespace admin_cms
 
             // app.UseSession();
 
-             app.UseCors(x => x
+            app.UseCors(x => x
                 .AllowAnyOrigin()
                 .AllowAnyMethod()
                 .AllowAnyHeader()
