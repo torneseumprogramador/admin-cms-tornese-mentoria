@@ -39,7 +39,14 @@ sudo systemctl restart nginx
 dotnet tool install --global dotnet-ef 
 dotnet ef database update
 
+*** verifica se aplicação está de pé
 sudo lsof -iTCP -sTCP:LISTEN -P | grep :5001
+
+*** verifica log acesso
+tail -f /var/log/nginx/access.log
+
+*** verifica log error
+tail -f /var/log/nginx/error.log
 
 https://stackoverflow.com/questions/44682864/cannot-connect-to-rds-sql-server-database-using-management-studio
 
